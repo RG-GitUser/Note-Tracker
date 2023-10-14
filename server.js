@@ -9,11 +9,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 
 // HTML and API endpoints defined 
-app.use(html_route);
-app.use(api_route);
+app.use('/api', api_route);
+app.use('/', html_route);
 
 // starting the server - listening for requests on the specifc port 
-api_route.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log('Server is running on port ${PORT}');
 });
 
