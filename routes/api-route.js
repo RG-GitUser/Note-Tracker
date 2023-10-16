@@ -7,7 +7,7 @@ const router = express.Router();
 const dataPath = path.join(__dirname, '../db/db.json');
 
 // API route to get notes
-router.get('/routes/api-route', (req, res) => {
+router.get('/api/notes', (req, res) => {
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
             console.error(err);
@@ -20,3 +20,4 @@ router.get('/routes/api-route', (req, res) => {
 });
 
 module.exports = router;
+
