@@ -13,6 +13,8 @@ router.get('/api/notes', (req, res) => {
 
 
 //Creates a new note bases on request from body 
+router.post('api/notes', (req, res) => {
+
 const newNote = {
     id: notes.length + 1, 
     title: req.body.title,
@@ -25,5 +27,6 @@ notes.push(newNote);
 fs.writeFileSync('db/db.json', JSON.stringify(notes)); 
 
 res.json(newNote);
+});
 
 module.exports = router; 
