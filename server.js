@@ -5,6 +5,9 @@ const html_route = require('./routes/html-route');
 const PORT = process.env.PORT || 5500;
 const app = express();
 
+// getting files from "public" directory 
+app.use(express.static('public'));
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 

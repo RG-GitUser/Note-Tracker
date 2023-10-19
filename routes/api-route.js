@@ -1,23 +1,29 @@
+//variables
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
+const fs = require ('fs');
 const router = express.Router();
 
-// path to JSON file
-const dataPath = path.join(__dirname, '../db/db.json');
-
-// API route to get notes
+//API route for getting notes 
 router.get('/api/notes', (req, res) => {
-    fs.readFile(dataPath, 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).json({ error: 'Unable to read data from the file' });
-        } else {
-            const notes = JSON.parse(data);
-            res.json(notes);
-        }
-    });
+    const notesData = fs.readFileSync('db/db.json', 'utf8'); //reading notes from JSON 
+
+    const notes = JSON.parse(notesData); //parsing data from JSON
+    res.json(notes); //sending JSON notes as a response 
 });
 
-module.exports = router;
 
+//Creates a new note bases on request from body 
+const newNote = {
+    id: notes.length + 1, 
+    title: req.body.title,
+    text: req.body.text, 
+};
+
+//Add note to notes array 
+notes.push(newNote);
+
+fs.writeFileSync('db/db.json', JSON.stringify(notes)); 
+
+res.json(newNote);
+
+module.exports = router; 
