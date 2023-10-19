@@ -2,7 +2,7 @@
 const express = require('express');
 const api_route = require('./routes/api-route');
 const html_route = require('./routes/html-route');
-const PORT = process.env.PORT || 5500;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 // getting files from "public" directory 
