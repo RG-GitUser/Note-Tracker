@@ -21,7 +21,7 @@ const show = (elem) => {
 
 // Hide an element
 const hide = (elem) => {
-  elem.style display = 'none';
+  elem.style.display = 'none';
 };
 
 // activeNote is used to keep track of the note in the textarea
@@ -152,19 +152,6 @@ const renderNoteList = async (notes) => {
   }
 };
 
-// Render the active note
-const renderActiveNote = () => {
-  const titleElement = document.getElementById('note-title');
-  const textElement = document.getElementById('note-text');
-
-  if (activeNote.id) {
-    titleElement.textContent = activeNote.title;
-    textElement.textContent = activeNote.text;
-  } else {
-    titleElement.textContent = '';
-    textElement.textContent = '';
-  }
-};
 
 // Returns HTML element with or without a delete button
 const createLi = (text, delBtn = true) => {
