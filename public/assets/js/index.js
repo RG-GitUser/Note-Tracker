@@ -4,6 +4,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 let clearBtn;
+let activeNote = {};
 
 if (window.location.pathname === '/notes.html') {
   noteTitle = document.querySelector('.note-title');
@@ -23,9 +24,6 @@ const show = (elem) => {
 const hide = (elem) => {
   elem.style.display = 'none';
 };
-
-// activeNote is used to keep track of the note in the textarea
-let activeNote = {};
 
 const getNotes = () =>
   fetch('/api/notes', {
@@ -82,6 +80,35 @@ const handleNoteSave = () => {
       console.error('Error saving note:', error);
     });
 };
+
+// saved notes are added to left side of application 
+saveNoteBtn.addEventListener('click', () => {
+  const saveNewNote = { 
+    title: noteTitle.value,
+    text: noteText.value,
+  };
+
+  saveNote(saveNewNote) // Use saveNote function
+    .then((savedNote) => {
+      displaySavedNote(savedNote);
+
+      // Clearing input fields 
+      noteTitle.value = '';
+      noteText.value = '';
+    })
+    .catch((error) => {
+      console.error('Error saving note', error);
+    });
+});
+
+// Function for adding saved note to left side of application 
+function displaySavedNote(note) {
+  const noteList = document.getElementById('note-list');
+  const liElement = document.createElement('li');
+  liElement.classList.add('list-group-item');
+  liElement.innerHTML = `<strong>${note.title}</strong><br>${note.text}`;
+  noteList.appendChild(liElement);
+}
 
 // Delete the clicked note
 const handleNoteDelete = (e) => {
