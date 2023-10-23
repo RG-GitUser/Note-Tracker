@@ -83,6 +83,37 @@ const handleNoteSave = () => {
     });
 };
 
+// saved notes are added to left side of application 
+saveNoteBtn.addEventListerner('click', () => {
+  const saveNewNote = { 
+    title: noteTitle.value,
+    text: noteText.value,
+
+  };
+
+  saveNewNote(newNote)
+  .then((savedNote) => {
+    displaySavedNote(savedNote);
+
+    //clearing input fields 
+    note.Title.value = '';
+    noteText.value = '';
+
+  })
+  .catch((error) => {
+    console.error('Error saving note', error);
+  });
+});
+
+// Function for adding saved note to left side of application 
+function displaySavedNote(note) {
+  const noteList = document.getElementById('note-list');
+  const liElement = document.createElement('li');
+  liElement.classList.add('list-group-item');
+  liElement.innerHTML = `<strong>${note.title}</strong><br>${note.text}`;
+  noteList.appendChild(liElement);
+}
+
 // Delete the clicked note
 const handleNoteDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked

@@ -6,7 +6,7 @@ const express = require('express');
 const api_route = require('./routes/api-route');
 const html_route = require('./routes/html-route');
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 const app = express();
 
 // path to db.json file 
