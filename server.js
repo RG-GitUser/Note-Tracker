@@ -19,7 +19,7 @@ app.use('/api', api_route);
 app.use('/', html_route);
 
 // route to "notes.html" file
-app.get('/notes', (req, res) => {
+app.get('/notes.html', (req, res) => {
   res.sendFile(`${__dirname}/public/notes.html`);
 });
 

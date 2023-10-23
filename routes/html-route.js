@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
 
 // route for notes file
-router.get('/notes', (req, res) => {
+router.get('/notes.html', (req, res) => {
     res.sendFile('../public/notes.html', { root: __dirname + '/../' });
 });
 

@@ -4,7 +4,7 @@ const fs = require ('fs');
 const router = express.Router();
 
 //API route for getting notes 
-router.get('/api/notes', (req, res) => {
+router.get('/notes', (req, res) => {
     const notesData = fs.readFileSync('db/db.json', 'utf8'); //reading notes from JSON 
 
     const notes = JSON.parse(notesData); //parsing data from JSON
