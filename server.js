@@ -6,7 +6,7 @@ const express = require('express');
 const api_route = require('./routes/api-route');
 const html_route = require('./routes/html-route');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 const app = express();
 
 // path to db.json file 
@@ -42,10 +42,27 @@ app.use(express.static('public'));
 app.use('/api', api_route);
 app.use('/', html_route);
 
-// route to "notes.html" file
-app.get('/notes.html', (req, res) => {
-  res.sendFile(`${__dirname}/public/notes.html`);
+
+// Implement a route for getting notes
+app.get('/api/notes', (req, res) => {
+  const notes = loadNotes();
+  res.json(notes);
 });
+
+// Implement a route for saving notes
+app.post('/api/notes', (req, res) => {
+  const notes = loadNotes();
+  const newNote = req.body;
+
+  // Assign a unique ID to the new note (e.g., using a timestamp)
+  newNote.id = Date.now();
+
+  notes.push(newNote);
+  saveNotes(notes);
+
+  res.json(newNote);
+});
+
 
 // starting the server - listening for requests on the specific port
 app.listen(PORT, () => {
