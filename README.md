@@ -17,7 +17,10 @@ You now have the repository cloned to your system! To verify, the command "ls" t
 
 Users are able to keep track of their daily tasks by creating, saving, and deleting notes from the "Note Tracker" application. 
 
-### Screenshot:
+### Screenshot: 
+
+![image](https://github.com/RG-GitUser/Note-Tracker/assets/139709113/dfeec8cc-dd4e-4d76-a089-fd5d21a3e5e5)
+
 
 ### Credits
 full stack Xpert Learning Assistant
