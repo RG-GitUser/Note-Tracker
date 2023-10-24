@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3003;
 const app = express();
 
 // path to db.json file 
-const dbFilePath = path.join(__dirname, 'db.json');
+const dbFilePath = path.join(__dirname, './db/db.json');
 
 // Loads notes from db.json file
 const loadNotes = () => {
@@ -34,37 +34,15 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Middleware for static files from the 'public' directory
-app.use(express.static('public'));
+
 
 // HTML and API endpoints defined
 app.use('/api', api_route);
 app.use('/', html_route);
 
-
-// Implement a route for getting notes
-app.get('/api/notes', (req, res) => {
-  const notes = loadNotes();
-  res.json(notes);
-});
-
-// Implement a route for saving notes
-app.post('/api/notes', (req, res) => {
-  const notes = loadNotes();
-  const newNote = req.body;
-
-  // Assign a unique ID to the new note (e.g., using a timestamp)
-  newNote.id = Date.now();
-
-  notes.push(newNote);
-  saveNotes(notes);
-
-  res.json(newNote);
-});
-
-
 // starting the server - listening for requests on the specific port
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
 
