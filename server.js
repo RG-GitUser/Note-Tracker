@@ -6,7 +6,7 @@ const express = require('express');
 const api_route = require('./routes/api-route');
 const html_route = require('./routes/html-route');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003;
 const app = express();
 
 // path to db.json file 
@@ -27,23 +27,6 @@ const loadNotes = () => {
 const saveNotes = (notes) => {
   fs.writeFileSync(dbFilePath, JSON.stringify(notes, null, 2));
 };
-
-// // Implement a route for saving notes
-// app.post('/api/notes', (req, res) => {
-//   const notes = loadNotes();
-//   const newNote = req.body;
-
-//   // Assign a unique ID to the new note (e.g., using a timestamp)
-//   newNote.id = Date.now();
-
-//   notes.push(newNote);
-  
-//   // Save the updated notes to db.json
-//   saveNotes(notes);
-
-//   res.json(newNote);
-// });
-
 
 // getting files from "public" directory 
 app.use(express.static('public'));

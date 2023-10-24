@@ -11,7 +11,7 @@ if (window.location.pathname === '/notes.html') {
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
-  noteList = document.querySelectorAll('.list-container .list-group');
+  noteList = document.querySelectorAll('.note-list');
   clearBtn = document.querySelector('.clear-btn');
 }
 
@@ -109,6 +109,71 @@ function displaySavedNote(note) {
   liElement.innerHTML = `<strong>${note.title}</strong><br>${note.text}`;
   noteList.appendChild(liElement);
 }
+
+// Function for note save
+// ...
+
+// Function for note save
+async function saveNewNote() {
+  const noteTitleValue = noteTitle.value;
+  const noteTextValue = noteText.value;
+
+  if (!noteTitleValue || !noteTextValue) {
+    return;
+  }
+  const newNote = {
+    title: noteTitleValue,
+    text: noteTextValue,
+  };
+  
+  try {
+    const response = await fetch('api/notes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newNote),
+    });
+  
+    const savedNote = await response.json();
+    displaySavedNote(savedNote);
+
+    // Clear input fields
+    noteTitle.value = '';  // Make sure you use semicolon here
+    noteText.value = '';
+  } catch (error) {
+    console.error('Error saving note', error);
+  }
+}
+
+// ...
+
+
+// Attaching the saveNewNote function to save button 
+saveNoteBtn.addEventListener('click', saveNewNote);
+
+
+// Loads notes on page load
+async function getAndRenderNotes() {
+  try {
+    const response = await fetch('/api/notes');
+    const notes = await response.json();
+    noteList.innerHTML = ''; // Clear the list
+
+    if (notes.length === 0) {
+      noteList.innerHTML = '<li class="list-group-item">No saved notes</li>';
+    } else {
+      notes.forEach((note) => {
+        displaySavedNote(note);
+      });
+    }
+  } catch (error) {
+    console.error('Error rendering notes:', error);
+  }
+}
+
+window.onload = getAndRenderNotes;
+
 
 // Delete the clicked note
 const handleNoteDelete = (e) => {
