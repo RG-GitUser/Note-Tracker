@@ -24,6 +24,9 @@ Users are able to keep track of their daily tasks by creating, saving, and delet
 ### Application
 https://young-spire-45463-f2cc5e74c51f.herokuapp.com/
 
+*Note: Unknown issue with routes. After selecting "Get Started" please delete ".html" from the URL.
+*Link: https://young-spire-45463-f2cc5e74c51f.herokuapp.com/notes
+
 
 ### Credits
 full stack Xpert Learning Assistant
